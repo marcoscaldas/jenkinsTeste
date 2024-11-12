@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     stages {
         stage('Instalar Dependências') {
             steps {
@@ -11,7 +10,6 @@ pipeline {
             }
         }
 
-
         stage('Configurar Banco de Dados') {
             steps {
                 script {
@@ -20,13 +18,11 @@ pipeline {
                     def mysqlPassword = env.DB_PASSWORD
                     def mysqlHost = env.DB_HOST
 
-
                     // Executa o script SQL com as variáveis
                     bat "\"C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysql.exe\" -u${mysqlUser} -p${mysqlPassword} -h${mysqlHost} --batch < sql/init.sql"
                 }
             }
         }
-
 
         stage('Executar Testes') {
             steps {
@@ -36,7 +32,6 @@ pipeline {
             }
         }
     }
-
 
     post {
         always {
